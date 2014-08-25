@@ -30,6 +30,7 @@
     <div class="row">
         <div class="col-md-12 nav-wrapper">
             <nav class="navbar navbar-default" role="navigation">
+                <a class="logo" href="#"><img src="<?php echo base_url(); ?>/img/logo.jpg" alt=""/></a>
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
@@ -39,7 +40,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"><img src="<?php echo base_url(); ?>/img/logo.jpg" alt=""/></a>
+
                     </div>
 
 
@@ -47,10 +48,11 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
+                            <li><a href="#">PRESS</a></li>
+                            <li><a href="#">RADIO</a></li>
+                            <li><a href="#">TV</a></li>
+                            <li><a href="#">INTERNET</a></li>
+                            <li><a href="#">CONTACT</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
@@ -67,7 +69,7 @@
             </div>
         </div>
     </div>
-    <div class="row main-page">
+    <div class="row main-page" style="margin-top: 20px">
         <div class="col-md-4">
             <h3>WHO <span>WE ARE</span></h3>
 
@@ -102,28 +104,30 @@
             </div>
         </div>
     </div>
-    <div class="row main-page">
-        <div class="col-md-7">
-            <h3>TESTIMONIALS</h3>
+    <div class="row main-page horizontal_line">
+        <div class="col-md-6">
+            <h4>TESTIMONIALS</h4>
             <span>
                   It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
             </span>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
+            <h4>CONNECT WITH US</h4>
             <img src="<?php echo base_url(); ?>/img/social.jpg" alt=""/>
         </div>
         <div class="col-md-3 pull-right">
+            <h4>CONTACT US</h4>
             <form action="" class="form-horizontal">
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                        <input type="email" class="form-control input-sm" id="inputEmail3" placeholder="Email">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                        <input type="password" class="form-control input-sm" id="inputPassword3" placeholder="Password">
                     </div>
                 </div>
                 <textarea class="form-control" rows="3"></textarea>
