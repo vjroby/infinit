@@ -10,8 +10,8 @@ class User_model extends CI_Model{
     public function checkEmail($email = null){
 
         if (!is_null($email)){
-            $query = $this->db->query('SELECT COUNT(id) AS count_u FROM user WHERE email =?',array($email));
-            return $query;
+            $query = $this->db->query('SELECT COUNT(id) AS count_users FROM user WHERE email =?',array($email));
+            return $query->row()->count_users;
         }
     }
 }
