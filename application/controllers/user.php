@@ -11,11 +11,11 @@ class User extends CI_Controller {
      * @param null $email
      */
     public function check_email($email = null){
-        $data = array('state' => 1);
+        $data = array('valid' => true);
 
         $result =  $this->User_model->checkEmail($email);
         if ($result != 0){
-            $data['state'] = 0;
+            $data['valid'] = false;
         }
         $this->output
             ->set_content_type('application/json')
@@ -98,9 +98,10 @@ class User extends CI_Controller {
      *
      */
     public function index(){
+        $data['session'] =  $this->session->userdata('logged_in');
         $this->load->view('tmpl/header');
         $this->load->view('tmpl/user_menu');
-        $this->load->view('user_index');
+        $this->load->view('user_index',$data);
         $this->load->view('tmpl/footer');
     }
 

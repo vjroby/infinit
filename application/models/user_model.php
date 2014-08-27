@@ -33,7 +33,7 @@ class User_model extends CI_Model{
      * @return mixed
      */
     public function checkEmail($email = null){
-
+        $email = $this->input->post('email');
         if (!is_null($email)){
             $query = $this->db->query('SELECT COUNT(id) AS count_users FROM user WHERE email =?',array($email));
             return $query->row()->count_users;

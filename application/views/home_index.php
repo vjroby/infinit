@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/orbit.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap.vertical-tabs.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrapValidator.min.css">
     <script src="<?php echo base_url(); ?>js/jquery-1.11.1.min.js"></script>
     <script src="<?php echo base_url(); ?>js/vendor/modernizr-2.6.2.min.js"></script>
 </head>

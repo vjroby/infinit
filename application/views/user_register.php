@@ -12,7 +12,7 @@
                         <?php echo validation_errors();  ?>
                     </div>
                 <?php endif; ?>
-                <form action="" method="POST" role="forn" class="form-horizontal">
+                <form action="" method="POST" role="forn" class="form-horizontal" id="registerForm">
                     <div class="form-group">
                         <label for="first_name" class="col-sm-4 control-label">Nume</label>
                         <div class="col-sm-8">
@@ -60,6 +60,78 @@
         </div>
 
     </div>
+    <script src="<?php echo base_url(); ?>js/bootstrapValidator.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('#registerForm').bootstrapValidator({
+               feedbackIcons: {
+                   valid: 'glyphicon glyphicon-ok',
+                   invalid: 'glyphicon glyphicon-remove',
+                   validating: 'glyphicon glyphicon-refresh'
+               },
+
+               fields: {
+                   first_name: {
+                       message: 'Numele nu este valid',
+                       validators: {
+                           notEmpty: {
+                               message: 'Numele trebuie completat'
+                           }
+                       }
+                   },
+                   last_name: {
+                       message: 'Prenumele nu este valid',
+                       validators: {
+                           notEmpty: {
+                               message: 'Prenumele trebuie completat'
+                           }
+                       }
+                   },
+                   email: {
+                       message: 'Email nu este valid',
+                       validators: {
+                           notEmpty: {
+                               message: 'Email trebuie completat'
+                           },
+                           remote: {
+                               message: 'Exista un cont cu acest email',
+                               url: '<?php echo base_url(); ?>/user/check_email/'
+                           }
+                       }
+                   },
+                   phone: {
+                       message: 'Telefonul nu este valid',
+                       validators: {
+                           notEmpty: {
+                               message: 'Telefonul trebuie completat'
+                           }
+                       }
+                   },
+                   password: {
+                       message: 'Parola nu este valida',
+                       validators: {
+                           notEmpty: {
+                               message: 'Parola trebuie completat'
+                           },
+                           identical: {
+                               field: 'passwordConf',
+                               message: 'Parolele n coincid'
+                           }
+                       }
+                   },
+                   passwordConf: {
+                       message: 'Parola nu este valid',
+                       validators: {
+                           notEmpty: {
+                               message: 'Parola trebuie completat'
+                           }
+                       }
+                   }
+               }
+           });
+        });
+    </script>
 </div>
 
  
