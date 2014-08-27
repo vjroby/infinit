@@ -74,7 +74,7 @@
             <h3>WHO <span>WE ARE</span></h3>
 
             <span>
-                Title some title orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                Title some title orem Ipsum is simply dummy text of the printing and typesetting industry.
             </span>
             <br/>
             <span>
@@ -82,7 +82,7 @@
             </span>
         </div>
         <div class="col-md-8">
-            <div class="col-md-6"> <!-- required for floating -->
+            <div class="col-md-6 nav-left"> <!-- required for floating -->
                 <h3>WHAT <span>WE DO</span></h3>
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs tabs-left">
@@ -104,12 +104,29 @@
             </div>
         </div>
     </div>
-    <div class="row main-page horizontal_line">
+    <div class="row main-page">
         <div class="col-md-6">
             <h4>TESTIMONIALS</h4>
-            <span>
-                  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </span>
+            <div id="testimonials">
+                <ul>
+                    <li>
+                        <span class="col-md-12">John Doo - director</span>
+                        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</span>
+                    </li>
+                    <li>
+                        <span class="col-md-12">John Doo - director</span>
+                        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</span>
+                    </li>
+                    <li>
+                        <span class="col-md-12">John Doo - director</span>
+                        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="controls-testi">
+                <img id="up" src="<?php echo base_url(); ?>/img/up.jpg" alt=""/>
+                <img id="down" src="<?php echo base_url(); ?>/img/down.jpg" alt=""/>
+            </div>
         </div>
         <div class="col-md-3">
             <h4>CONNECT WITH US</h4>
@@ -117,41 +134,58 @@
         </div>
         <div class="col-md-3 pull-right">
             <h4>CONTACT US</h4>
-            <form action="" class="form-horizontal">
+            <form action="" class="form-horizontal home-page-form">
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
+                    <label for="inputEmail3" class="col-xs-4 control-label">Email</label>
+                    <div class="col-xs-8">
                         <input type="email" class="form-control input-sm" id="inputEmail3" placeholder="Email">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-                    <div class="col-sm-10">
+                    <label for="inputPassword3" class="col-xs-4 control-label">Password</label>
+                    <div class="col-xs-8">
                         <input type="password" class="form-control input-sm" id="inputPassword3" placeholder="Password">
                     </div>
                 </div>
                 <textarea class="form-control" rows="3"></textarea>
-                <div class="form-group">
+                <div class="form-group" style="margin-top: 10px;">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">Sign in</button>
+                        <button type="submit" class="btn btn-default btn-xs pull-right">SEND</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <footer>
-        <span>Copyright &copy; 2010 CLR MEDIA. All Rights Reserved</span>
-    </footer>
+
 </div>
+    <div class="container-fluid footer">
+        <footer class="text-center">
+            <span>Copyright &copy; 2010 CLR MEDIA. All Rights Reserved</span>
+
+        </footer>
+    </div>
 
 <script src="<?php echo base_url(); ?>js/plugins.js"></script>
 <script src="<?php echo base_url(); ?>js/bootstrap.js"></script>
 <script src="<?php echo base_url(); ?>js/main.js"></script>
 <!--<script src="--><?php //echo base_url(); ?><!--js/infinitecarousel/jquery.infinitecarousel3.min.js"></script>-->
 <script src="<?php echo base_url(); ?>js/jquery.orbit-1.2.3.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>js/vTicker.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $('#featured').orbit();
+        $('#testimonials').vTicker({
+            showItems: 2,
+            padding: 4,
+        });
+
+        $('#down').on('click', function(){
+            $('#testimonials').vTicker('prev', {animate:true});
+        });
+
+        $('#up').on('click', function(){
+            $('#testimonials').vTicker('next', {animate:true});
+        });
     });
 </script>
 </body>
