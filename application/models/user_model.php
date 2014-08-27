@@ -82,7 +82,7 @@ class User_model extends CI_Model{
         $return = "<div>
         <span>Buna ziua {$first_name} {$last_name}</span><br />
         <span>Pentru activarea contului dumneavoastra va rog sa faceti click <a href=";
-        $return .= '"'.base_url().'/users/activate/'.urlencode($email).'/'.$token.'/">Aici</a>';
+        $return .= '"'.base_url().'/user/activate_account/'.$token.'/'.urlencode($email).'/">Aici</a>';
         $return .= "</span>
         </div>";
 
@@ -116,7 +116,7 @@ class User_model extends CI_Model{
     /**
      * update usr in database after login
      */
-    private function  update_login($userId){
+    public  function  update_login($userId){
         $sql = "UPDATE user SET logged = 1, longip = ? WHERE id = ?";
         $params = array(
             ip2long($_SERVER['REMOTE_ADDR']),
