@@ -7,6 +7,9 @@ class User extends CI_Controller {
         $this->load->model('User_model');
     }
 
+    /**
+     * @param null $email
+     */
     public function check_email($email = null){
         $data = array('state' => 1);
 
@@ -20,6 +23,9 @@ class User extends CI_Controller {
 
     }
 
+    /**
+     * register new account
+     */
     public function register(){
         $this->load->library('form_validation');
         if (!$this->input->post('regUser')){
@@ -62,6 +68,9 @@ class User extends CI_Controller {
 
     }
 
+    /**
+     * login
+     */
     public function login(){
         $this->load->library('form_validation');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
@@ -85,6 +94,9 @@ class User extends CI_Controller {
 
     }
 
+    /**
+     *
+     */
     public function index(){
         $this->load->view('tmpl/header');
         $this->load->view('tmpl/user_menu');
@@ -92,32 +104,70 @@ class User extends CI_Controller {
         $this->load->view('tmpl/footer');
     }
 
-
-    public function check_database($password)
-    {
+    /**
+     * check the login credentials
+     *
+     * @param $password
+     * @return bool
+     */
+    public function check_database($password){
         //Field validation succeeded.  Validate against database
         $email = $this->input->post('email');
 
         //query the database
         $result = $this->User_model->login($email, $password);
 
-        if($result)
+        if($result[0]->active == 1)
         {
             $sess_array = array();
             foreach($result as $row)
             {
                 $sess_array = array(
                     'id' => $row->id,
-                    'username' => $row->email
+                    'first_name' => $row->first_name,
+                    'last_name' => $row->last_name,
                 );
                 $this->session->set_userdata('logged_in', $sess_array);
+                $this->User_model->update_login( $row->id);
             }
             return TRUE;
+        }elseif($result[0]->active == 0){
+            $this->form_validation->set_message('check_database', 'Contul nu este activat. Verificati email-ul');
+            return false;
         }
         else
         {
-            $this->form_validation->set_message('check_database', 'Invalid username or password');
+            $this->form_validation->set_message('check_database', 'Credentiale invalide');
             return false;
         }
     }
+
+    public function activate_account($token = null, $email = null){
+//        var_dump(urlencode('dinu.robert.gabriel@gmail.com'));
+        if (is_null($token) || is_null($email)){
+            redirect('user/register');
+        }else{
+
+            $email = urldecode($email);
+            $response = $this->User_model->activate_account($token, $email);
+            $data['activated'] = 'Credentiale invalide, va rog sa reluati procesul de inregistrare';
+            if ($response == 1){
+                $data['activated'] = 'C0ntul a fost activat. Va puteti loga.';
+            }
+
+            $this->load->view('tmpl/header');
+            $this->load->view('tmpl/user_menu');
+            $this->load->view('user_activation', $data);
+            $this->load->view('tmpl/footer');
+        }
+
+    }
+
+    public function logout(){
+        $this->session->unset_userdata('logged_in');
+        session_destroy();
+        redirect('user', 'login');
+    }
+
+
 }
