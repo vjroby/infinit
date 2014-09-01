@@ -50,6 +50,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="passwordConf" class="col-sm-4 control-label"><?php echo $captcha['image']; ?></label>
+                        <div class="col-sm-8">
+                            <input type="password" name="captcha" class="form-control" id="passwordConf" placeholder="Introdu caracterele din imagine">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" name="regUser" value="1" class="btn btn-default">Trimite</button>
                         </div>
@@ -58,11 +64,12 @@
                 </form>
             </div>
         </div>
-
+        <helper help="<?php echo($captcha['word']);?>" ></helper>
     </div>
     <script src="<?php echo base_url(); ?>js/bootstrapValidator.js" type="text/javascript"></script>
 
     <script type="text/javascript">
+        var captcha = '<?php echo $captcha['word']; ?>';
         $(document).ready(function(){
            $('#registerForm').bootstrapValidator({
                feedbackIcons: {
@@ -125,6 +132,28 @@
                        validators: {
                            notEmpty: {
                                message: 'Parola trebuie completat'
+                           },
+                           identical: {
+                               field: 'password',
+                               message: 'Parolele n coincid'
+                           }
+                       }
+                   },
+                   captcha: {
+                       message: 'Captcha invalid',
+                       validators: {
+                           notEmpty: {
+                               message: 'Introduceti caractele din imagine'
+                           },
+                           callback: {
+                               callback: function(value, validator, $field){
+//                                    if (value != captcha){
+//                                        return false;
+//                                    }else{
+//                                        return true;
+//                                    }
+                                   return true;
+                               }
                            }
                        }
                    }

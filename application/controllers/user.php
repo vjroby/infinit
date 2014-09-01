@@ -2,6 +2,8 @@
 
 class User extends CI_Controller {
 
+    private $captcha;
+
     public function __construct(){
         parent::__construct();
         $this->load->model('User_model');
@@ -28,10 +30,24 @@ class User extends CI_Controller {
      */
     public function register(){
         $this->load->library('form_validation');
+        $this->load->helper('captcha');
+        $data = array();
+
+        $vals = array(
+            'img_path'	=> './captcha/',
+            'img_url'	=> 'http://localhost/infinit/captcha/',
+//            'font_path'	=> './path/to/fonts/texb.ttf',
+            'img_width'	=> '150',
+            'img_height' => 30,
+            'expiration' => 7200
+        );
+        $data['captcha'] = create_captcha($vals);
+        $this->captcha = $data['captcha']['word'];
+
         if (!$this->input->post('regUser')){
             $this->load->view('tmpl/header');
             $this->load->view('tmpl/user_menu');
-            $this->load->view('user_register');
+            $this->load->view('user_register',$data);
             $this->load->view('tmpl/footer');
         }else{
             $this->form_validation->set_rules('first_name', 'Nume', 'trim|required|xss_clean');
@@ -40,6 +56,7 @@ class User extends CI_Controller {
             $this->form_validation->set_rules('phone', 'Telefon', 'trim|required|xss_clean||max_length[10]');
             $this->form_validation->set_rules('password', 'Parola', 'trim|required|xss_clean|matches[passwordConf]');
             $this->form_validation->set_rules('passwordConf', 'Confirma parola', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('captcha', 'Introdu captcha', 'trim|required|xss_clean|callback_check_captcha');
 
 
             if($this->form_validation->run() != FALSE)
@@ -59,7 +76,7 @@ class User extends CI_Controller {
             {
                 $this->load->view('tmpl/header');
                 $this->load->view('tmpl/user_menu');
-                $this->load->view('user_register');
+                $this->load->view('user_register',$data);
                 $this->load->view('tmpl/footer');
             }
 
@@ -168,6 +185,15 @@ class User extends CI_Controller {
         $this->session->unset_userdata('logged_in');
         session_destroy();
         redirect('user', 'login');
+    }
+
+    public function check_captcha($val_from_input){
+        if ( $val_from_input == $this->captcha){
+            return true;
+        }else{
+            $this->form_validation->set_message('check_captcha', 'Captcha invalid.');
+            return false;
+        }
     }
 
 
